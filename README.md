@@ -6,7 +6,6 @@ Un assistant personnel qui **capte mes messages Telegram et mes emails Gmail**, 
 ![Gemini](https://img.shields.io/badge/IA-Google%20Gemini-4285F4)
 ![Airtable](https://img.shields.io/badge/Base-Airtable-18BFFF)
 ![Telegram](https://img.shields.io/badge/Bot-Telegram-26A5E4?logo=telegram&logoColor=white)
-![Docker](https://img.shields.io/badge/Docker-pr%C3%AAt-2496ED?logo=docker&logoColor=white)
 
 ![Architecture de l'assistant](docs/architecture.svg)
 
@@ -84,7 +83,7 @@ flowchart LR
 
 ## Stack technique
 
-Python · Google Gemini (`google-genai`) · Airtable (API REST) · python-telegram-bot (avec JobQueue) · Gmail API (OAuth) · Docker
+Python · Google Gemini (`google-genai`) · Airtable (API REST) · python-telegram-bot (avec JobQueue) · Gmail API (OAuth)
 
 ## Installation
 
@@ -147,25 +146,21 @@ python -m app.telegram_bot        # lance le bot
 
 Envoie `/start` au bot pour obtenir ton identifiant Telegram, renseigne-le dans `TELEGRAM_ALLOWED_USER_ID`, puis relance.
 
-## Déploiement avec Docker
+## Limites actuelles
 
-```bash
-mkdir data && cp token.json data/token.json     # uniquement si Gmail est activé
-docker compose up -d --build
-docker compose logs -f
-```
-
-Le conteneur redémarre automatiquement après un plantage ou un redémarrage du serveur. Le dossier `data/` conserve le token Gmail et la liste des emails déjà traités.
+- Le bot tourne en local : les rappels ne partent que lorsqu'il est lancé (pas de déploiement sur un serveur pour l'instant).
+- Les emails déjà traités sont mémorisés dans un fichier local.
 
 ## Sécurité
 
-- `.env`, `credentials.json`, `token.json` et `data/` ne doivent **jamais** être publiés : ils sont exclus par `.gitignore` et `.dockerignore`.
+- `.env`, `credentials.json`, `token.json` et `data/` ne doivent **jamais** être publiés : ils sont exclus par `.gitignore`.
 - Ne publie pas de capture d'écran montrant un token, une URL d'autorisation Google ou un identifiant de base.
 - Si une clé a été exposée, régénère-la immédiatement : supprimer le fichier d'un commit ne l'efface pas de l'historique Git.
 - L'offre gratuite de Gemini peut utiliser les données envoyées pour améliorer les produits de Google : à prendre en compte pour les emails sensibles (restreins `GMAIL_QUERY`).
 
 ## Pistes d'amélioration
 
+- Déploiement sur un serveur pour que les rappels partent en continu.
 - Brouillons de réponse aux emails (en lecture/écriture limitée aux brouillons, sans jamais envoyer).
 - Résumé quotidien des tâches du jour envoyé sur Telegram.
 - Commandes Telegram (`/taches`, `/aujourdhui`) pour consulter la liste sans ouvrir Airtable.
@@ -173,5 +168,4 @@ Le conteneur redémarre automatiquement après un plantage ou un redémarrage du
 
 ## Auteure
 
-**Flora**, Master 2 Informatique (Systèmes d'information, DevOps, Data & IA) à l'EPSI Toulouse.
-Portfolio : [portfoliodeflasolia.netlify.app](https://portfoliodeflasolia.netlify.app)
+**Flora**
