@@ -174,4 +174,3 @@ Le conteneur redémarre automatiquement après un plantage ou un redémarrage du
 ## Auteure
 
 **Flora**, Master 2 Informatique (Systèmes d'information, DevOps, Data & IA) à l'EPSI Toulouse.
-Portfolio : [portfoliodeflasolia.netlify.app](https://portfoliodeflasolia.netlify.app)
